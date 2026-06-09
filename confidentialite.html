@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politique de confidentialité — Horizon Visual Agency</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fbfbf8;
+  --cream-2:#f4f4ee;
+  --cream-3:#ededE4;
+  --ink:#0a0a0a;
+  --ink-soft:#2a2a2a;
+  --gray:#6b6b68;
+  --gray-light:#a8a8a3;
+  --border:#e8e8e0;
+  --border-dark:#d8d8d0;
+  --blue:#3d95ff;
+  --blue-dark:#2878e0;
+  --yellow:#fcf240;
+  --sans:'Inter',-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-feature-settings:"ss01","cv11"}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--blue);color:#fff}
+
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(10,10,10,.035) 1px, transparent 1px),linear-gradient(90deg, rgba(10,10,10,.035) 1px, transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;-webkit-mask-image:radial-gradient(ellipse 90% 90% at 50% 50%, #000 30%, transparent 90%);mask-image:radial-gradient(ellipse 90% 90% at 50% 50%, #000 30%, transparent 90%)}
+
+h1,h2,h3,h4{font-weight:800;letter-spacing:-.04em;line-height:.92}
+h1{font-size:clamp(44px,6.8vw,108px);font-weight:900}
+h2{font-size:clamp(28px,3.2vw,42px);font-weight:800;letter-spacing:-.035em}
+h3{font-size:16px;font-weight:700;letter-spacing:-.015em}
+
+.hl-blue{display:inline-block;background:var(--blue);color:#fff;padding:0 .14em;border-radius:8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hl-yellow{display:inline-block;background:var(--yellow);color:var(--ink);padding:0 .12em;border-radius:8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--blue);z-index:1000;transition:width .1s}
+
+nav.top{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:28px;padding:9px 9px 9px 20px;background:rgba(251,251,248,.45);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.6);border-radius:100px;box-shadow:0 8px 32px rgba(10,10,10,.08), inset 0 1px 0 rgba(255,255,255,.6);white-space:nowrap}
+nav .logo{font-weight:800;font-size:14px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav ul{display:flex;list-style:none;gap:22px;font-size:13px;font-weight:500;color:var(--ink-soft)}
+nav ul a{transition:color .2s;white-space:nowrap}
+nav ul a:hover{color:var(--blue)}
+.nav-cta{padding:8px 8px 8px 16px;background:var(--cream);color:var(--ink);border-radius:100px;font-size:12.5px;font-weight:500;transition:all .3s;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border-dark)}
+.nav-cta:hover{background:var(--yellow);border-color:var(--yellow);transform:translateY(-1px);box-shadow:0 8px 20px -4px rgba(252,242,64,.5)}
+.nav-cta .nav-arrow{width:24px;height:24px;background:var(--ink);color:var(--cream);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:transform .3s;flex-shrink:0}
+.nav-cta:hover .nav-arrow{transform:rotate(-45deg)}
+
+.container{max-width:1280px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--cream);border:1px solid var(--border);border-radius:100px;font-size:12px;font-weight:500;color:var(--ink-soft);margin-bottom:24px}
+.badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(61,149,255,.2);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+.legal-hero{position:relative;padding:180px 0 80px;overflow:hidden}
+.legal-hero::before{content:'';position:absolute;top:-100px;right:-200px;width:700px;height:700px;background:radial-gradient(circle, rgba(61,149,255,.15) 0%, transparent 60%);pointer-events:none;z-index:1;animation:floatGlow 12s ease-in-out infinite}
+.legal-hero::after{content:'';position:absolute;bottom:-100px;left:-150px;width:500px;height:500px;background:radial-gradient(circle, rgba(252,242,64,.18) 0%, transparent 60%);pointer-events:none;z-index:1;animation:floatGlow 14s ease-in-out infinite reverse}
+@keyframes floatGlow{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-20px)}}
+.legal-hero h1{max-width:980px;margin-bottom:28px}
+.legal-hero h1 .break{display:block}
+.legal-hero p.lede{font-size:17px;color:var(--gray);max-width:620px;line-height:1.6;margin-bottom:28px}
+.legal-meta{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:rgba(251,251,248,.8);backdrop-filter:blur(8px);border:1px solid var(--border);border-radius:100px;font-size:12px;font-weight:500;color:var(--ink-soft)}
+.legal-meta::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue)}
+
+.fade{height:80px;background:linear-gradient(to bottom, var(--cream) 0%, var(--cream-2) 100%)}
+
+.legal-section{background:var(--cream-2);padding:80px 0 120px;position:relative}
+.legal-layout{display:grid;grid-template-columns:280px 1fr;gap:80px}
+.sidebar{position:sticky;top:120px;height:fit-content}
+.sidebar-title{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);margin-bottom:14px;padding-left:6px}
+.sidebar-list{list-style:none;display:flex;flex-direction:column;gap:4px}
+.sidebar-link{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;text-decoration:none;color:var(--ink-soft);font-size:13.5px;font-weight:500;transition:all .25s;border:1px solid transparent}
+.sidebar-link .num{font-size:11px;color:var(--gray-light);font-weight:600;font-variant-numeric:tabular-nums}
+.sidebar-link:hover{background:var(--cream);color:var(--ink)}
+.sidebar-link.active{background:var(--cream);border-color:var(--border);color:var(--ink);box-shadow:0 4px 14px rgba(10,10,10,.04)}
+.sidebar-link.active .num{color:var(--blue)}
+
+.content-section{margin-bottom:64px;scroll-margin-top:140px}
+.content-section:last-child{margin-bottom:0}
+.section-num{display:inline-block;font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.08em;margin-bottom:12px;font-variant-numeric:tabular-nums}
+.content-section h2{margin-bottom:20px}
+.content-section p{font-size:16px;color:var(--ink-soft);line-height:1.7;margin-bottom:18px;max-width:680px}
+.content-section p strong{color:var(--ink);font-weight:600}
+.content-section ul{margin:0 0 18px 0;padding:0;list-style:none;max-width:680px}
+.content-section ul li{position:relative;padding:8px 0 8px 28px;font-size:15.5px;color:var(--ink-soft);line-height:1.6}
+.content-section ul li::before{content:'';position:absolute;left:0;top:18px;width:14px;height:1.5px;background:var(--blue);border-radius:2px}
+
+.info-card{background:var(--cream);border:1px solid var(--border);border-radius:20px;padding:28px 30px;margin-top:24px;max-width:620px;transition:all .3s}
+.info-card:hover{border-color:var(--border-dark);transform:translateY(-2px);box-shadow:0 16px 40px -16px rgba(10,10,10,.08)}
+.info-card-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.info-card-icon{width:36px;height:36px;border-radius:10px;background:var(--ink);color:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.info-card-icon.yellow{background:var(--yellow);color:var(--ink)}
+.info-card-icon.blue{background:var(--blue);color:#fff}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-size:14px;gap:20px}
+.info-row + .info-row{border-top:1px dashed var(--border)}
+.info-label{color:var(--gray);font-weight:500}
+.info-value{color:var(--ink);font-weight:600;text-align:right}
+.info-value a{color:var(--ink);transition:color .2s}
+.info-value a:hover{color:var(--blue)}
+
+/* Rights grid (specific to confidentialité) */
+.rights-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:28px;
+  max-width:680px;
+}
+.right-card{
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px 22px;
+  transition:all .3s;
+}
+.right-card:hover{
+  border-color:var(--ink);
+  transform:translateY(-3px);
+  box-shadow:0 14px 32px -16px rgba(10,10,10,.12);
+}
+.right-card .rc-num{
+  font-size:11px;
+  font-weight:700;
+  color:var(--blue);
+  letter-spacing:.08em;
+  margin-bottom:8px;
+  font-variant-numeric:tabular-nums;
+}
+.right-card .rc-title{
+  font-size:14.5px;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:6px;
+  letter-spacing:-.01em;
+}
+.right-card .rc-desc{
+  font-size:13px;
+  color:var(--gray);
+  line-height:1.5;
+}
+
+.legal-cta{margin-top:80px;padding:48px 40px;background:var(--ink);color:var(--cream);border-radius:28px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;position:relative;overflow:hidden}
+.legal-cta::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle, rgba(61,149,255,.25) 0%, transparent 70%);pointer-events:none}
+.legal-cta-text h3{font-size:22px;font-weight:700;margin-bottom:6px;letter-spacing:-.02em;position:relative;z-index:1}
+.legal-cta-text p{font-size:14px;color:var(--gray-light);position:relative;z-index:1}
+.cta-btn{display:inline-flex;align-items:center;gap:12px;padding:14px 10px 14px 24px;background:var(--cream);color:var(--ink);border-radius:100px;font-size:14.5px;font-weight:500;transition:all .3s;position:relative;z-index:1}
+.cta-btn:hover{background:var(--yellow);transform:translateY(-2px);box-shadow:0 12px 30px -8px rgba(252,242,64,.5)}
+.cta-btn .arrow{width:30px;height:30px;background:var(--ink);color:var(--cream);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:transform .3s}
+.cta-btn:hover .arrow{transform:rotate(-45deg)}
+
+footer{background:var(--cream);color:var(--ink);padding:56px 0 28px;position:relative;overflow:hidden}
+footer::before{content:'HORIZON*';position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);font-size:clamp(120px,24vw,380px);font-weight:900;letter-spacing:-.05em;color:var(--cream-2);z-index:0;white-space:nowrap;line-height:.8;pointer-events:none}
+.footer-bottom{position:relative;z-index:2;padding-top:24px;display:flex;justify-content:space-between;font-size:12px;color:var(--gray);align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom a{color:inherit;opacity:.65;text-decoration:underline;text-underline-offset:3px;transition:opacity .2s, color .2s}
+.footer-bottom a:hover{opacity:1;color:var(--ink)}
+.footer-bottom .status{display:flex;align-items:center;gap:8px}
+.footer-bottom .status::before{content:'';width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.2);animation:pulse 2s infinite}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,1,.2,1), transform .8s cubic-bezier(.2,1,.2,1)}
+.reveal.show{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.08s}
+.reveal-delay-2{transition-delay:.16s}
+.reveal-delay-3{transition-delay:.24s}
+
+@media (max-width:960px){
+  .legal-layout{grid-template-columns:1fr;gap:40px}
+  .sidebar{position:static}
+  nav ul{display:none}
+}
+@media (max-width:640px){
+  .legal-cta{padding:36px 28px;flex-direction:column;align-items:flex-start}
+  .info-row{flex-direction:column;align-items:flex-start;gap:4px}
+  .info-value{text-align:left}
+  .rights-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav class="top">
+  <a href="index.html" class="logo">
+    <img src="logo horizon.png" alt="Horizon Visual Agency" style="height:28px;width:auto;border-radius:6px;">
+    Horizon Visual Agency
+  </a>
+  <ul>
+    <li><a href="index.html#problem">Pourquoi</a></li>
+    <li><a href="index.html#guarantee">Garanties</a></li>
+    <li><a href="index.html#method">Méthode</a></li>
+    <li><a href="index.html#projects">Études de cas</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">
+    <span>Réserver un appel</span>
+    <span class="nav-arrow">
+      <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </a>
+</nav>
+
+<header class="legal-hero">
+  <div class="container">
+    <span class="badge reveal">RGPD · Vos données</span>
+    <h1 class="reveal reveal-delay-1">
+      <span class="break">Politique de</span>
+      <span class="break"><span class="hl-blue">confidentialité.</span></span>
+    </h1>
+    <p class="lede reveal reveal-delay-2">Vos données sont sensibles. Voici exactement ce que nous collectons, pourquoi, combien de temps nous le conservons et comment vous gardez le contrôle total à chaque instant.</p>
+    <span class="legal-meta reveal reveal-delay-3">Conforme RGPD · <span id="dyn-date">Avril 2026</span></span>
+  </div>
+</header>
+
+<div class="fade"></div>
+
+<section class="legal-section">
+  <div class="container">
+    <div class="legal-layout">
+
+      <aside class="sidebar reveal">
+        <div class="sidebar-title">Sommaire</div>
+        <ul class="sidebar-list">
+          <li><a href="#responsable" class="sidebar-link active"><span class="num">01</span><span>Responsable du traitement</span></a></li>
+          <li><a href="#donnees" class="sidebar-link"><span class="num">02</span><span>Données collectées</span></a></li>
+          <li><a href="#finalites" class="sidebar-link"><span class="num">03</span><span>Finalités</span></a></li>
+          <li><a href="#base-legale" class="sidebar-link"><span class="num">04</span><span>Base légale</span></a></li>
+          <li><a href="#duree" class="sidebar-link"><span class="num">05</span><span>Durée de conservation</span></a></li>
+          <li><a href="#destinataires" class="sidebar-link"><span class="num">06</span><span>Destinataires</span></a></li>
+          <li><a href="#droits" class="sidebar-link"><span class="num">07</span><span>Vos droits RGPD</span></a></li>
+          <li><a href="#cookies" class="sidebar-link"><span class="num">08</span><span>Cookies</span></a></li>
+          <li><a href="#securite" class="sidebar-link"><span class="num">09</span><span>Sécurité</span></a></li>
+        </ul>
+      </aside>
+
+      <main>
+
+        <section id="responsable" class="content-section reveal">
+          <span class="section-num">01 — Responsable</span>
+          <h2>Responsable du traitement.</h2>
+          <p>Le responsable du traitement de vos données personnelles est <strong>Horizon Visual Agency</strong>, représenté par son directeur Ilyes Benkhlifa.</p>
+
+          <div class="info-card">
+            <div class="info-card-head">
+              <div class="info-card-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <h3>Contact data privacy</h3>
+            </div>
+            <div class="info-row"><span class="info-label">Délégué</span><span class="info-value">Ilyes Benkhlifa</span></div>
+            <div class="info-row"><span class="info-label">Email dédié</span><span class="info-value"><a href="mailto:contact@horizon-visual-agency.com">contact@horizon-visual-agency.com</a></span></div>
+            <div class="info-row"><span class="info-label">Localisation</span><span class="info-value">Paris, France</span></div>
+            <div class="info-row"><span class="info-label">Délai de réponse</span><span class="info-value">Sous 30 jours</span></div>
+          </div>
+        </section>
+
+        <section id="donnees" class="content-section reveal">
+          <span class="section-num">02 — Données collectées</span>
+          <h2>Données <span class="hl-yellow">collectées.</span></h2>
+          <p>Nous appliquons un principe strict de <strong>minimisation</strong> : seules les données strictement nécessaires à la mission sont traitées.</p>
+          <ul>
+            <li><strong>Identité</strong> — nom, prénom, fonction, entreprise</li>
+            <li><strong>Coordonnées</strong> — email professionnel, numéro de téléphone</li>
+            <li><strong>Données projet</strong> — brief, objectifs, contenus transmis</li>
+            <li><strong>Données de facturation</strong> — raison sociale, SIREN, adresse, IBAN</li>
+            <li><strong>Données techniques</strong> — accès hébergement et outils tiers fournis volontairement</li>
+          </ul>
+          <p>Aucune donnée sensible (santé, opinions, biométrie) n'est collectée ni traitée.</p>
+        </section>
+
+        <section id="finalites" class="content-section reveal">
+          <span class="section-num">03 — Finalités</span>
+          <h2>Finalités du traitement.</h2>
+          <p>Vos données sont utilisées exclusivement pour :</p>
+          <ul>
+            <li>Répondre à vos demandes de contact et de devis</li>
+            <li>Conduire la mission contractuelle (design, développement, livraison)</li>
+            <li>Émettre la facturation et assurer le suivi comptable</li>
+            <li>Communiquer sur l'avancement du projet via nos canaux sécurisés</li>
+            <li>Respecter nos obligations légales et fiscales</li>
+          </ul>
+          <p>Aucune donnée n'est utilisée à des fins de prospection commerciale tierce, de profilage publicitaire ou de revente.</p>
+        </section>
+
+        <section id="base-legale" class="content-section reveal">
+          <span class="section-num">04 — Base légale</span>
+          <h2>Base légale.</h2>
+          <p>Conformément à l'article 6 du RGPD, le traitement de vos données repose sur :</p>
+          <ul>
+            <li><strong>L'exécution du contrat</strong> qui nous lie pour les missions clients</li>
+            <li><strong>Votre consentement explicite</strong> pour les demandes de contact volontaires</li>
+            <li><strong>Le respect d'une obligation légale</strong> pour la facturation et l'archivage comptable</li>
+            <li><strong>Notre intérêt légitime</strong> à présenter nos références dans le portfolio (sauf opposition)</li>
+          </ul>
+        </section>
+
+        <section id="duree" class="content-section reveal">
+          <span class="section-num">05 — Conservation</span>
+          <h2>Durée de conservation.</h2>
+          <p>Vos données sont conservées uniquement le temps nécessaire à la finalité poursuivie, puis archivées ou supprimées.</p>
+
+          <div class="info-card">
+            <div class="info-card-head">
+              <div class="info-card-icon blue">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <h3>Durées légales</h3>
+            </div>
+            <div class="info-row"><span class="info-label">Prospects (devis non signé)</span><span class="info-value">3 ans</span></div>
+            <div class="info-row"><span class="info-label">Clients (relation active)</span><span class="info-value">Durée du contrat</span></div>
+            <div class="info-row"><span class="info-label">Factures & comptabilité</span><span class="info-value">10 ans</span></div>
+            <div class="info-row"><span class="info-label">Données projet (archives)</span><span class="info-value">5 ans après livraison</span></div>
+          </div>
+        </section>
+
+        <section id="destinataires" class="content-section reveal">
+          <span class="section-num">06 — Destinataires</span>
+          <h2>Destinataires & sous-traitants.</h2>
+          <p>Vos données sont traitées exclusivement par Horizon Visual Agency. Aucune donnée n'est cédée, vendue ou louée à des tiers commerciaux.</p>
+          <p>Nous faisons appel à un nombre limité de sous-traitants techniques (RGPD-compliant) strictement nécessaires à l'exploitation :</p>
+          <ul>
+            <li><strong>GitHub Pages</strong> — hébergement statique du site</li>
+            <li><strong>Google Workspace</strong> — emails et documents collaboratifs</li>
+            <li><strong>Stripe</strong> — traitement des paiements (PCI DSS)</li>
+            <li><strong>Calendly</strong> — prise de rendez-vous</li>
+          </ul>
+        </section>
+
+        <section id="droits" class="content-section reveal">
+          <span class="section-num">07 — Vos droits</span>
+          <h2>Vos droits RGPD.</h2>
+          <p>Vous disposez à tout moment d'un contrôle total sur vos données. Vous pouvez exercer les droits suivants par simple email à <a href="mailto:contact@horizon-visual-agency.com" style="color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:3px">contact@horizon-visual-agency.com</a>.</p>
+
+          <div class="rights-grid">
+            <div class="right-card">
+              <div class="rc-num">01</div>
+              <div class="rc-title">Droit d'accès</div>
+              <div class="rc-desc">Obtenir une copie de toutes vos données détenues.</div>
+            </div>
+            <div class="right-card">
+              <div class="rc-num">02</div>
+              <div class="rc-title">Droit de rectification</div>
+              <div class="rc-desc">Corriger toute information inexacte ou obsolète.</div>
+            </div>
+            <div class="right-card">
+              <div class="rc-num">03</div>
+              <div class="rc-title">Droit à l'effacement</div>
+              <div class="rc-desc">Demander la suppression de vos données personnelles.</div>
+            </div>
+            <div class="right-card">
+              <div class="rc-num">04</div>
+              <div class="rc-title">Droit à la portabilité</div>
+              <div class="rc-desc">Récupérer vos données dans un format structuré.</div>
+            </div>
+            <div class="right-card">
+              <div class="rc-num">05</div>
+              <div class="rc-title">Droit d'opposition</div>
+              <div class="rc-desc">Refuser un traitement basé sur l'intérêt légitime.</div>
+            </div>
+            <div class="right-card">
+              <div class="rc-num">06</div>
+              <div class="rc-title">Droit à la limitation</div>
+              <div class="rc-desc">Geler temporairement le traitement de vos données.</div>
+            </div>
+          </div>
+
+          <p style="margin-top:28px">En cas de désaccord persistant, vous pouvez introduire une réclamation auprès de la <strong>CNIL</strong> (<a href="https://www.cnil.fr" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:3px">cnil.fr</a>).</p>
+        </section>
+
+        <section id="cookies" class="content-section reveal">
+          <span class="section-num">08 — Cookies</span>
+          <h2>Cookies & traceurs.</h2>
+          <p>Le site Horizon Visual Agency fonctionne <strong>sans cookie publicitaire ni traceur tiers</strong>. Aucun script de profilage, aucune revente d'audience, aucun pixel social n'est déployé.</p>
+          <p>Seuls des cookies techniques essentiels au fonctionnement de la navigation peuvent être posés. Ils ne nécessitent pas de consentement explicite conformément à la doctrine CNIL.</p>
+        </section>
+
+        <section id="securite" class="content-section reveal">
+          <span class="section-num">09 — Sécurité</span>
+          <h2>Sécurité des données.</h2>
+          <p>Nous mettons en œuvre l'ensemble des mesures techniques et organisationnelles appropriées pour garantir la <strong>confidentialité, l'intégrité et la disponibilité</strong> de vos données.</p>
+          <ul>
+            <li>Chiffrement TLS 1.3 sur l'ensemble des communications</li>
+            <li>Authentification forte (2FA) sur tous les outils internes</li>
+            <li>Accès restreint au strict besoin opérationnel</li>
+            <li>Sauvegardes chiffrées et redondantes</li>
+            <li>Procédure de notification sous 72 h en cas de violation</li>
+          </ul>
+        </section>
+
+        <a href="contact.html" class="legal-cta reveal" style="text-decoration:none">
+          <div class="legal-cta-text">
+            <h3>Exercer un droit ou poser une question&nbsp;?</h3>
+            <p>Notre équipe data privacy vous répond personnellement sous 30 jours.</p>
+          </div>
+          <span class="cta-btn">
+            Nous écrire
+            <span class="arrow">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </span>
+        </a>
+
+      </main>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span id="dyn-year">2026</span> Horizon Visual Agency — <a href="mentions-legales.html">Mentions légales</a> · <a href="cgv.html">CGV</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="contact.html">Contact</a></span>
+      <span class="status">Trajectoire <span id="dyn-quarter">Q2 2026</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  progressBar.style.width = pct + '%';
+}, { passive: true });
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+const sections = document.querySelectorAll('.content-section');
+const sidebarLinks = document.querySelectorAll('.sidebar-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.pageYOffset >= s.offsetTop - 180) current = s.getAttribute('id');
+  });
+  sidebarLinks.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+  });
+}, { passive: true });
+
+(function(){
+  const d = new Date();
+  const y = d.getFullYear();
+  const q = Math.floor(d.getMonth() / 3) + 1;
+  const months = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const yEl = document.getElementById('dyn-year');
+  const qEl = document.getElementById('dyn-quarter');
+  const dEl = document.getElementById('dyn-date');
+  if (yEl) yEl.textContent = y;
+  if (qEl) qEl.textContent = 'Q' + q + ' ' + y;
+  if (dEl) dEl.textContent = months[d.getMonth()] + ' ' + y;
+})();
+</script>
+</body>
+</html>

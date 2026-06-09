@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Étude de cas — Podblend Studio | Horizon Visual Agency</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#fbfbf8;
+  --cream-2:#f4f4ee;
+  --ink:#0a0a0a;
+  --ink-soft:#2a2a2a;
+  --gray:#6b6b68;
+  --gray-light:#a8a8a3;
+  --border:#e8e8e0;
+  --border-dark:#d8d8d0;
+  --blue:#3d95ff;
+  --yellow:#fcf240;
+  --sans:'Inter',-apple-system,sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  font-family:var(--sans);
+  background:var(--cream);
+  /* Ajout d'une texture discrète en fond */
+  background-image: radial-gradient(rgba(10,10,10,.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color:var(--ink);
+  overflow-x:hidden;
+  font-feature-settings:"ss01","cv11";
+}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--blue);color:#fff}
+
+/* PROGRESS BAR */
+#progress-bar{
+  position:fixed;top:0;left:0;height:2px;
+  background:linear-gradient(90deg,var(--blue),var(--yellow));
+  z-index:10000;width:0%;pointer-events:none;
+}
+
+/* NAV — réutilise le style index */
+nav.top{
+  position:fixed;
+  top:20px;left:50%;
+  transform:translateX(-50%);
+  z-index:100;
+  display:flex;
+  align-items:center;
+  gap:28px;
+  padding:9px 9px 9px 20px;
+  background:rgba(251,251,248,.55);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,.6);
+  border-radius:100px;
+  box-shadow:0 8px 32px rgba(10,10,10,.08), inset 0 1px 0 rgba(255,255,255,.6);
+  white-space:nowrap;
+}
+nav .logo{
+  font-weight:800;font-size:14px;
+  letter-spacing:-.02em;
+  display:flex;align-items:center;gap:8px;
+}
+nav .logo-mark{
+  width:20px;height:20px;
+  border-radius:6px;background:var(--blue);
+  position:relative;
+  box-shadow:0 4px 12px rgba(61,149,255,.35);
+  flex-shrink:0;
+}
+nav .logo-mark::after{
+  content:'';position:absolute;inset:5px;
+  background:var(--yellow);border-radius:2px;
+}
+nav ul{display:flex;list-style:none;gap:22px;font-size:13px;font-weight:500;color:var(--ink-soft)}
+nav ul a{transition:color .2s}
+nav ul a:hover{color:var(--blue)}
+.nav-cta{
+  padding:8px 8px 8px 16px;
+  background:var(--cream);color:var(--ink);
+  border-radius:100px;
+  font-size:12.5px;font-weight:500;
+  transition:all .3s;
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--border-dark);
+}
+.nav-cta:hover{background:var(--yellow);border-color:var(--yellow);transform:translateY(-1px);box-shadow:0 8px 20px -4px rgba(252,242,64,.5)}
+.nav-cta .nav-arrow{
+  width:24px;height:24px;
+  background:var(--ink);color:var(--cream);
+  border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:transform .3s;flex-shrink:0;
+}
+.nav-cta:hover .nav-arrow{transform:rotate(-45deg)}
+
+/* CONTAINER */
+.container{max-width:1200px;margin:0 auto;padding:0 32px}
+
+/* BACK LINK */
+.back-link-wrap{padding-top:120px}
+.back-link{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:500;
+  color:var(--gray);
+  transition:color .25s, transform .25s;
+  margin-bottom:32px;
+}
+.back-link:hover{color:var(--ink);transform:translateX(-4px)}
+.back-link svg{transition:transform .25s}
+
+/* ============ GALERIE AFFINÉE & EFFET HOVER ============ */
+.gallery {
+  display: grid;
+  /* On réduit la colonne mobile à 0.7fr pour l'aligner visuellement */
+  grid-template-columns: 2.2fr 0.7fr 1.2fr 1.2fr;
+  column-gap: 16px;
+  row-gap: 10px; /* Réduction de l'écart vertical entre les cases */
+  margin-bottom: 80px;
+  align-items: start;
+}
+.gallery-item {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--cream-2);
+  border: 1px solid var(--border);
+  display: block;
+  padding: 0;
+  /* Préparation de l'effet hover */
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+/* Effet au survol pour un rendu plus dynamique */
+.gallery-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(10, 10, 10, 0.08);
+  border-color: var(--blue);
+  z-index: 2;
+}
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: initial;
+}
+.gallery-item.feature { grid-column: 1; grid-row: 1 / span 2; }
+.gallery-item.tall { grid-column: 2; grid-row: 1 / span 2; }
+
+/* CONTENT MAIN */
+.content-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:80px;
+  align-items:flex-start;
+  margin-bottom:80px;
+}
+
+/* LEFT SIDE — INFO */
+.case-logo-wrap{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:28px;
+}
+.case-logo{
+  width:64px;height:64px;
+  border-radius:14px;
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:11px;letter-spacing:.1em;
+  color:var(--cream);
+  text-align:center;line-height:1.1;
+  padding:8px;
+}
+.case-logo.podblend{
+  background:linear-gradient(135deg,#1a0f06,#080807);
+  border:1px solid rgba(195,120,50,.5);
+  box-shadow:0 0 20px rgba(185,105,40,.3),inset 0 0 30px rgba(140,70,20,.1);
+  color:#e8d2b0;
+}
+.case-name{
+  font-size:14px;font-weight:600;
+  color:var(--gray);
+  letter-spacing:-.01em;
+}
+
+.case-title{
+  font-size:clamp(48px,6.5vw,84px);
+  font-weight:900;letter-spacing:-.04em;
+  line-height:.92;
+  margin-bottom:16px;
+}
+.case-tagline{
+  font-size:18px;
+  color:var(--gray);
+  line-height:1.55;
+  margin-bottom:24px;
+  max-width:480px;
+}
+
+/* TAGS */
+.case-tags{
+  display:flex;flex-wrap:wrap;gap:8px;
+  padding-bottom:32px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:40px;
+}
+.case-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;
+  background:var(--cream);
+  border:1px solid var(--border-dark);
+  border-radius:100px;
+  font-size:13px;font-weight:500;
+  color:var(--ink-soft);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.case-tag:hover {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(10, 10, 10, 0.1);
+}
+.case-tag::before{
+  display: none; /* Cache la puce jaune pour un rendu plus sobre */
+}
+
+/* SECTOR LINE */
+.sector-line{
+  font-size:14px;
+  color:var(--gray);
+  margin-bottom:32px;
+}
+.sector-line strong{
+  color:var(--ink);
+  font-weight:700;
+}
+
+/* CASE BLOCK */
+.case-block{
+  margin-bottom:32px;
+}
+.case-block h3{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  margin-bottom:10px;
+  color:var(--ink);
+  display:flex;align-items:center;gap:8px;
+}
+.case-block h3 .emoji{
+  font-size:18px;
+}
+.case-block p{
+  font-size:15px;
+  line-height:1.65;
+  color:var(--ink-soft);
+  max-width:560px;
+}
+.case-block p strong{
+  color:var(--ink);
+  font-weight:600;
+}
+
+/* RECETTE LIST */
+.recette-list{
+  list-style:none;
+  margin-top:16px;
+}
+.recette-list li{
+  font-size:15px;
+  line-height:1.75;
+  color:var(--ink-soft);
+  padding-left:22px;
+  position:relative;
+}
+.recette-list li::before{
+  content:'';
+  position:absolute;
+  left:0;top:11px;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--blue);
+}
+.recette-list li strong{
+  color:var(--ink);
+  font-weight:700;
+}
+
+/* PUNCHLINE */
+.punchline{
+  margin-top:32px;
+  padding:24px 28px;
+  background:var(--ink);
+  color:var(--cream);
+  border-radius:18px;
+  font-size:18px;
+  font-weight:500;
+  line-height:1.45;
+  letter-spacing:-.01em;
+  position:relative;
+  overflow:hidden;
+}
+.punchline::before{
+  content:'"';
+  position:absolute;
+  top:-30px;right:20px;
+  font-size:160px;
+  font-weight:900;
+  color:rgba(252,242,64,.12);
+  line-height:1;
+  font-family:Georgia,serif;
+  pointer-events:none;
+}
+
+/* RIGHT SIDE — STICKY CARD */
+.your-turn-card{
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:32px;
+  position:sticky;
+  top:120px;
+  box-shadow:0 20px 60px -20px rgba(10,10,10,.08);
+}
+.your-turn-mockup{
+  background:var(--ink);
+  border-radius:14px;
+  padding:6px;
+  margin-bottom:24px;
+  position:relative;
+}
+.ytm-bar{
+  display:flex;align-items:center;gap:4px;
+  padding:6px 8px;
+}
+.ytm-bar .d{width:6px;height:6px;border-radius:50%}
+.ytm-bar .d:nth-child(1){background:#ff5f57}
+.ytm-bar .d:nth-child(2){background:#febc2e}
+.ytm-bar .d:nth-child(3){background:#28c840}
+.ytm-screen{
+  background:#0a0a0a;
+  border-radius:8px;
+  aspect-ratio:16/9;
+  position:relative;
+  overflow:hidden;
+  background-image:
+    radial-gradient(ellipse at 30% 30%, rgba(61,149,255,.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(252,242,64,.2) 0%, transparent 50%);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:20px;
+}
+.ytm-screen .small-title{
+  font-size:11px;font-weight:900;
+  letter-spacing:-.02em;line-height:1.05;
+  color:#fff;
+  margin-bottom:6px;
+}
+.ytm-screen .small-title .b{
+  background:var(--blue);padding:0 4px;border-radius:3px;
+}
+.ytm-screen .small-sub{
+  font-size:8px;
+  color:rgba(255,255,255,.5);
+}
+
+.your-turn-card h3{
+  font-size:24px;font-weight:800;letter-spacing:-.025em;
+  margin-bottom:12px;
+}
+.your-turn-card p{
+  font-size:14px;line-height:1.55;
+  color:var(--gray);
+  margin-bottom:24px;
+}
+.your-turn-actions{
+  display:flex;flex-direction:column;gap:10px;
+}
+.yt-btn{
+  display:inline-flex;
+  align-items:center;justify-content:space-between;gap:10px;
+  padding:14px 18px;
+  border-radius:100px;
+  font-size:13px;font-weight:600;
+  transition:all .25s;
+}
+.yt-btn-primary{
+  background:var(--ink);color:var(--cream);
+}
+.yt-btn-primary:hover{background:var(--blue);transform:translateY(-2px)}
+.yt-btn-ghost{
+  background:transparent;
+  border:1px solid var(--border-dark);
+  color:var(--ink);
+}
+.yt-btn-ghost:hover{border-color:var(--ink);background:var(--cream-2)}
+.yt-btn svg{transition:transform .25s}
+.yt-btn:hover svg{transform:rotate(-45deg)}
+
+/* TESTIMONIAL */
+.testi-section{
+  padding:0 0 80px;
+}
+.testi-card{
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:36px 40px;
+  max-width:720px;
+  position:relative;
+  box-shadow:0 12px 40px -16px rgba(10,10,10,.06);
+}
+.testi-quote-mark{
+  font-size:48px;
+  font-weight:900;
+  color:var(--yellow);
+  font-family:Georgia,serif;
+  line-height:.5;
+  margin-bottom:6px;
+  display:inline-block;
+}
+.testi-text{
+  font-size:17px;
+  line-height:1.55;
+  color:var(--ink);
+  margin-bottom:24px;
+  font-weight:500;
+}
+.testi-author{
+  display:flex;align-items:center;gap:12px;
+}
+.testi-avatar{
+  width:44px;height:44px;
+  border-radius:50%;
+  background:var(--cream); /* Fond blanc/crème */
+  border: 1px solid var(--border-dark);
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ink);
+  font-weight:800;font-size:14px;
+  letter-spacing:-.01em;
+}
+.testi-name{
+  font-size:14px;
+  font-weight:700;
+  color:var(--ink);
+  letter-spacing:-.01em;
+}
+.testi-role{
+  font-size:12px;
+  color:var(--gray);
+  margin-top:2px;
+}
+
+/* FADE BOTTOM */
+.fade-bottom{
+  height:80px;
+  background:linear-gradient(180deg,var(--cream) 0%,var(--ink) 100%);
+}
+
+/* FOOTER */
+footer{
+  background:var(--ink);
+  color:var(--cream);
+  padding:80px 0 40px;
+  position:relative;
+  overflow:hidden;
+}
+footer::before{
+  content:'HORIZON*';
+  position:absolute;
+  bottom:-30px;left:50%;
+  transform:translateX(-50%);
+  font-size:clamp(120px,22vw,340px);
+  font-weight:900;
+  letter-spacing:-.05em;
+  color:rgba(255,255,255,.04);
+  z-index:0;
+  white-space:nowrap;
+  line-height:.8;
+  pointer-events:none;
+}
+.footer-row{
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  gap:48px;
+  padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  margin-bottom:30px;
+}
+.footer-brand .logo{
+  display:flex;align-items:center;gap:10px;
+  font-size:18px;font-weight:800;
+  margin-bottom:18px;
+}
+.footer-brand p{
+  font-size:14px;
+  color:rgba(255,255,255,.5);
+  max-width:380px;
+  line-height:1.65;
+}
+.footer-col h5{
+  font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.08em;
+  color:rgba(255,255,255,.4);
+  margin-bottom:16px;
+}
+.footer-col a{
+  display:block;
+  font-size:14px;
+  color:rgba(255,255,255,.7);
+  margin-bottom:10px;
+  transition:color .2s;
+}
+.footer-col a:hover{color:var(--yellow)}
+.footer-bottom{
+  position:relative;z-index:2;
+  display:flex;justify-content:space-between;
+  font-size:12px;
+  color:rgba(255,255,255,.4);
+  flex-wrap:wrap;gap:12px;
+}
+
+/* WHATSAPP */
+.wa-btn{
+  position:fixed;
+  bottom:32px;right:32px;
+  z-index:500;
+  width:58px;height:58px;
+  border-radius:50%;
+  background:#25D366;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 28px rgba(37,211,102,.45);
+  animation:waFloat 3.5s ease-in-out infinite;
+  transition:transform .3s, box-shadow .3s;
+}
+.wa-btn:hover{
+  transform:translateY(-4px) scale(1.08);
+  box-shadow:0 14px 40px rgba(37,211,102,.6);
+}
+@keyframes waFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* REVEAL */
+.rev{
+  opacity:0;transform:translateY(24px);
+  transition:opacity .8s cubic-bezier(.2,.9,.2,1),transform .8s cubic-bezier(.2,.9,.2,1);
+}
+.rev.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.05s}
+.d2{transition-delay:.15s}
+.d3{transition-delay:.25s}
+.d4{transition-delay:.35s}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .gallery { 
+    grid-template-columns: 1fr 1fr; 
+    gap: 12px;
+    align-items: start; 
+  }
+  .gallery-item.feature { grid-column: 1 / span 2; }
+  .gallery-item.tall { grid-column: 1; }
+  .content-grid{grid-template-columns:1fr;gap:48px}
+  .your-turn-card{position:static}
+  .footer-row{grid-template-columns:1fr;gap:32px}
+  nav.top ul{display:none}
+}
+@media(max-width:640px){
+  .case-title{font-size:48px}
+  .case-tagline{font-size:16px}
+  .testi-card{padding:28px}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav class="top">
+  <a href="index.html" class="logo">
+    <img src="logo horizon.png" alt="Horizon Visual Agency" style="height: 28px; width: auto; border-radius: 6px;">
+    Horizon Visual Agency
+  </a>
+  <ul>
+    <li><a href="index.html#problem">Pourquoi</a></li>
+    <li><a href="projets.html">Études de cas</a></li>
+    <li><a href="index.html#method">Méthode</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">
+    <span>Réserver un appel</span>
+    <span class="nav-arrow">
+      <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </a>
+</nav>
+
+<div class="container">
+  <div class="back-link-wrap">
+    <a href="projets.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11 7H3M7 3L3 7l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Revenir au portfolio</span>
+    </a>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery rev">
+    <div class="gallery-item feature">
+      <img src="podblend-hero.png" alt="Vue principale">
+    </div>
+    <div class="gallery-item tall">
+      <img src="Screenshot 2026-04-26 at 12.54.16.png" alt="Version mobile">
+    </div>
+    <div class="gallery-item small">
+      <img src="Screenshot 2026-04-26 at 13.39.00.png" alt="Détail">
+    </div>
+    <div class="gallery-item small">
+      <img src="Screenshot 2026-04-26 at 13.43.10.png" alt="Détail">
+    </div>
+    <div class="gallery-item small">
+      <img src="Screenshot 2026-04-26 at 12.55.16.png" alt="Détail">
+    </div>
+    <div class="gallery-item small">
+      <img src="Screenshot 2026-04-26 at 13.34.41.png" alt="Détail">
+    </div>
+  </div>
+
+  <!-- CONTENT GRID -->
+  <div class="content-grid">
+
+    <!-- LEFT — STORY -->
+    <div class="case-content">
+      <div class="case-logo-wrap rev d1">
+        <img src="podblend-logo.webp" alt="Podblend Studio" style="width: 64px; height: auto; filter: invert(1);">
+        <div class="case-name">Podblend Studio</div>
+      </div>
+
+      <h1 class="case-title rev d1">Podblend</h1>
+      <p class="case-tagline rev d2">Redonner au talent sa vraie place.</p>
+
+      <div class="case-tags rev d2">
+        <span class="case-tag">Design Premium</span>
+        <span class="case-tag">Stratégie de Marque</span>
+        <span class="case-tag">Landing Page</span>
+      </div>
+
+      <div class="sector-line rev d3">
+        <strong>Secteur :</strong> Studio de production audiovisuelle / Podcast & vidéo
+      </div>
+
+      <div class="case-block rev d3">
+        <h3>Le plafond de verre</h3>
+        <p>Podblend, c'est du lourd : des productions d'élite, mais un site qui ne reflétait pas le niveau de leur qualité. Ils avaient un talent fou, mais leur vitrine digitale les empêchait de monter leurs tarifs.</p>
+      </div>
+
+      <div class="case-block rev d3">
+        <h3>Le choc visuel</h3>
+        <p>On a arrêté de "vendre un service" pour vendre une <strong>autorité</strong>. On a dégagé tout le superflu pour ne garder que l'impact. On a créé un design qui impose le respect dès la première seconde. L'idée : que le prospect se dise <strong>"C'est eux qu'il me faut"</strong> avant même d'avoir cliqué sur un bouton.</p>
+      </div>
+
+      <div class="case-block rev d3">
+        <h3>Zéro négociation</h3>
+        <p>Le résultat est immédiat : le site ne se contente plus d'informer, il rassure. Podblend a enfin une vitrine à la hauteur de son ambition. Finis les doutes sur les tarifs, <strong>l'image légitime le prix</strong>.</p>
+      </div>
+
+      <div class="case-block rev d4">
+        <h3>La méthode Horizon</h3>
+        <ul class="recette-list">
+          <li><strong>Épure totale :</strong> on laisse la place au travail, rien d'autre.</li>
+          <li><strong>Focus conversion :</strong> chaque élément donne envie de prendre contact.</li>
+          <li><strong>Mobile First :</strong> une fluidité parfaite, peu importe l'écran.</li>
+        </ul>
+      </div>
+
+      <div class="punchline rev d4">
+        Quand l'image impose le respect, le prix ne devient plus qu'un détail.
+      </div>
+    </div>
+
+    <!-- RIGHT — YOUR TURN STICKY -->
+    <aside class="your-turn-card rev d2">
+      <h3>C'est à votre tour ?</h3>
+      <p>Horizon, l'agence qui conçoit des sites web et applications haute performance pour des marques qui veulent vendre, pas juste exister.</p>
+      <div class="your-turn-actions">
+        <a href="contact.html" class="yt-btn yt-btn-primary">
+          <span>Réserver un appel</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="index.html" class="yt-btn yt-btn-ghost">
+          <span>Découvrir Horizon</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- TESTIMONIAL -->
+  <div class="testi-section">
+    <div class="testi-card rev">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">L'équipe Horizon a transformé notre vision en un levier de conversion majeur. Réactivité et rigueur stratégique au rendez-vous. Je recommande à 100%.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AG</div>
+        <div>
+          <div class="testi-name">Abdelkarim Ghebenteni</div>
+          <div class="testi-role">CEO @ Podblend Studio</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="fade-bottom"></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="logo horizon.png" alt="Horizon Visual Agency" style="height: 48px; width: auto; border-radius: 10px;">
+          Horizon Visual Agency
+        </div>
+        <p>Cabinet d'ingénierie digitale spécialisé dans la création d'expériences haute performance et l'optimisation des conversions. Basé à Paris.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <a href="index.html">Accueil</a>
+        <a href="projets.html">Études de cas</a>
+        <a href="index.html#method">Méthode</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Étude de cas</h5>
+        <a href="etude-horizon.html">Horizon Visual Agency</a>
+        <a href="etude-podblend.html">Podblend Studio</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="dyn-year">2026</span> Horizon Visual Agency — Tous droits réservés</span>
+      <a href="projets.html">← Retour au portfolio</a>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/33658596713" class="wa-btn" target="_blank" rel="noopener" aria-label="Nous contacter sur WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+const pb = document.getElementById('progress-bar');
+if (pb) window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  pb.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, {passive:true});
+
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+document.getElementById('dyn-year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

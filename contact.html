@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Horizon Visual Agency</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fbfbf8;
+  --cream-2:#f4f4ee;
+  --cream-3:#ededE4;
+  --ink:#0a0a0a;
+  --ink-soft:#2a2a2a;
+  --gray:#6b6b68;
+  --gray-light:#a8a8a3;
+  --border:#e8e8e0;
+  --border-dark:#d8d8d0;
+  --blue:#3d95ff;
+  --blue-dark:#2878e0;
+  --yellow:#fcf240;
+  --sans:'Inter',-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-feature-settings:"ss01","cv11"}
+a{color:inherit;text-decoration:none}
+button{font:inherit;background:none;border:none;cursor:pointer;color:inherit}
+::selection{background:var(--blue);color:#fff}
+
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(10,10,10,.035) 1px, transparent 1px),linear-gradient(90deg, rgba(10,10,10,.035) 1px, transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;-webkit-mask-image:radial-gradient(ellipse 90% 90% at 50% 50%, #000 30%, transparent 90%);mask-image:radial-gradient(ellipse 90% 90% at 50% 50%, #000 30%, transparent 90%)}
+
+h1,h2,h3,h4{font-weight:800;letter-spacing:-.04em;line-height:.92}
+h1{font-size:clamp(44px,6.8vw,108px);font-weight:900}
+h2{font-size:clamp(32px,4.2vw,56px);font-weight:800;letter-spacing:-.035em}
+h3{font-size:18px;font-weight:700;letter-spacing:-.02em}
+
+.hl-blue{display:inline-block;background:var(--blue);color:#fff;padding:0 .14em;border-radius:8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hl-yellow{display:inline-block;background:var(--yellow);color:var(--ink);padding:0 .12em;border-radius:8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+#progress-bar{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--blue);z-index:1000;transition:width .1s}
+
+nav.top{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:28px;padding:9px 9px 9px 20px;background:rgba(251,251,248,.45);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.6);border-radius:100px;box-shadow:0 8px 32px rgba(10,10,10,.08), inset 0 1px 0 rgba(255,255,255,.6);white-space:nowrap}
+nav .logo{font-weight:800;font-size:14px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;white-space:nowrap}
+nav ul{display:flex;list-style:none;gap:22px;font-size:13px;font-weight:500;color:var(--ink-soft)}
+nav ul a{transition:color .2s;white-space:nowrap}
+nav ul a:hover{color:var(--blue)}
+.nav-cta{padding:8px 8px 8px 16px;background:var(--ink);color:var(--cream);border-radius:100px;font-size:12.5px;font-weight:500;transition:all .3s;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink)}
+.nav-cta:hover{background:var(--yellow);color:var(--ink);border-color:var(--yellow);transform:translateY(-1px);box-shadow:0 8px 20px -4px rgba(252,242,64,.5)}
+.nav-cta .nav-arrow{width:24px;height:24px;background:var(--cream);color:var(--ink);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;transition:transform .3s;flex-shrink:0}
+.nav-cta:hover .nav-arrow{background:var(--ink);color:var(--yellow);transform:rotate(-45deg)}
+
+.container{max-width:1280px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:var(--cream);border:1px solid var(--border);border-radius:100px;font-size:12px;font-weight:500;color:var(--ink-soft);margin-bottom:24px}
+.badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(61,149,255,.2);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ============ HERO ============ */
+.contact-hero{position:relative;padding:160px 0 60px;overflow:hidden}
+.contact-hero::before{content:'';position:absolute;top:-100px;right:-200px;width:700px;height:700px;background:radial-gradient(circle, rgba(61,149,255,.18) 0%, transparent 60%);pointer-events:none;z-index:1;animation:floatGlow 12s ease-in-out infinite}
+.contact-hero::after{content:'';position:absolute;bottom:-100px;left:-150px;width:500px;height:500px;background:radial-gradient(circle, rgba(252,242,64,.18) 0%, transparent 60%);pointer-events:none;z-index:1;animation:floatGlow 14s ease-in-out infinite reverse}
+@keyframes floatGlow{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-20px)}}
+.contact-hero h1{max-width:980px;margin-bottom:28px}
+.contact-hero h1 .break{display:block}
+.contact-hero p.lede{font-size:18px;color:var(--gray);max-width:620px;line-height:1.6}
+
+/* ============ SPLIT SECTION ============ */
+.contact-split{padding:60px 0 100px;position:relative}
+.split-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:60px;align-items:start}
+
+/* LEFT — channels */
+.channels-title{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gray);
+  margin-bottom:18px;
+}
+.channels{display:flex;flex-direction:column;gap:14px;margin-bottom:32px}
+.channel-card{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:22px 24px;
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:20px;
+  transition:all .3s;
+  position:relative;
+  overflow:hidden;
+}
+.channel-card:hover{
+  border-color:var(--ink);
+  transform:translateY(-4px);
+  box-shadow:0 22px 48px -22px rgba(10,10,10,.18);
+}
+.channel-card .ch-icon{
+  width:46px;height:46px;
+  border-radius:14px;
+  background:var(--cream-2);
+  color:var(--ink);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:all .3s;
+}
+.channel-card.email .ch-icon{background:var(--ink);color:var(--cream)}
+.channel-card.whatsapp .ch-icon{background:#25D366;color:#fff}
+.channel-card.calendly .ch-icon{background:var(--blue);color:#fff}
+.channel-card .ch-body{flex:1;min-width:0}
+.channel-card .ch-label{
+  font-size:11px;
+  font-weight:600;
+  color:var(--gray);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.channel-card .ch-value{
+  font-size:15px;
+  font-weight:600;
+  color:var(--ink);
+  letter-spacing:-.01em;
+  word-break:break-word;
+}
+.channel-card .ch-arrow{
+  width:34px;height:34px;
+  border-radius:50%;
+  background:var(--cream-2);
+  color:var(--ink);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:all .3s;
+}
+.channel-card:hover .ch-arrow{
+  background:var(--ink);
+  color:var(--cream);
+  transform:rotate(-45deg);
+}
+
+/* Availability strip */
+.availability{
+  background:var(--ink);
+  color:var(--cream);
+  border-radius:24px;
+  padding:28px 30px;
+  position:relative;
+  overflow:hidden;
+}
+.availability::before{
+  content:'';
+  position:absolute;
+  top:-60px;right:-60px;
+  width:200px;height:200px;
+  background:radial-gradient(circle, rgba(252,242,64,.22) 0%, transparent 70%);
+  pointer-events:none;
+}
+.av-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gray-light);
+  position:relative;
+  z-index:1;
+}
+.av-head::before{
+  content:'';
+  width:8px;height:8px;
+  border-radius:50%;
+  background:#4ade80;
+  box-shadow:0 0 0 3px rgba(74,222,128,.25);
+  animation:pulse 2s infinite;
+}
+.av-text{
+  font-size:18px;
+  font-weight:600;
+  letter-spacing:-.02em;
+  line-height:1.4;
+  margin-bottom:6px;
+  position:relative;
+  z-index:1;
+}
+.av-text strong{color:var(--yellow)}
+.av-sub{
+  font-size:13px;
+  color:var(--gray-light);
+  position:relative;
+  z-index:1;
+}
+
+/* RIGHT — form */
+.form-wrap{
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:38px 38px 34px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 30px 60px -32px rgba(10,10,10,.12);
+}
+.form-wrap::before{
+  content:'';
+  position:absolute;
+  top:-80px;right:-80px;
+  width:240px;height:240px;
+  background:radial-gradient(circle, rgba(61,149,255,.12) 0%, transparent 70%);
+  pointer-events:none;
+}
+.form-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:24px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gray);
+  position:relative;
+  z-index:1;
+}
+.form-head::before{
+  content:'';
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--blue);
+}
+form.contact-form{position:relative;z-index:1;display:flex;flex-direction:column;gap:18px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{
+  font-size:12px;
+  font-weight:600;
+  color:var(--ink-soft);
+  letter-spacing:-.005em;
+}
+.field label .req{color:var(--blue);margin-left:2px}
+.field input,
+.field select,
+.field textarea{
+  font:inherit;
+  width:100%;
+  padding:13px 16px;
+  background:var(--cream-2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  font-size:14.5px;
+  color:var(--ink);
+  transition:all .25s;
+  outline:none;
+  font-family:var(--sans);
+}
+.field input::placeholder,
+.field textarea::placeholder{color:var(--gray-light)}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  background:var(--cream);
+  border-color:var(--ink);
+  box-shadow:0 0 0 4px rgba(61,149,255,.12);
+}
+.field textarea{
+  min-height:130px;
+  resize:vertical;
+  line-height:1.5;
+}
+.field select{
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M3 4.5l3 3 3-3' stroke='%230a0a0a' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:36px;
+  cursor:pointer;
+}
+
+/* Tags / chips selectors */
+.chip-group{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  padding:9px 14px;
+  background:var(--cream-2);
+  border:1px solid var(--border);
+  border-radius:100px;
+  font-size:13px;
+  font-weight:500;
+  color:var(--ink-soft);
+  cursor:pointer;
+  transition:all .25s;
+  user-select:none;
+}
+.chip:hover{border-color:var(--ink-soft);color:var(--ink)}
+.chip.active{
+  background:var(--ink);
+  border-color:var(--ink);
+  color:var(--cream);
+}
+.chip.active.yellow{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+
+.consent{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:12px;
+  color:var(--gray);
+  line-height:1.5;
+  margin-top:4px;
+}
+.consent input{
+  margin-top:2px;
+  width:16px;height:16px;
+  accent-color:var(--blue);
+  flex-shrink:0;
+}
+.consent a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+
+.submit-btn{
+  margin-top:8px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:18px 10px 18px 28px;
+  background:var(--ink);
+  color:var(--cream);
+  border-radius:100px;
+  font-size:15px;
+  font-weight:500;
+  transition:all .3s;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  width:100%;
+}
+.submit-btn::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:var(--yellow);
+  transform:translateY(101%);
+  transition:transform .4s cubic-bezier(.2,.9,.2,1);
+}
+.submit-btn > *{position:relative;z-index:1}
+.submit-btn:hover{color:var(--ink);transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(252,242,64,.55)}
+.submit-btn:hover::before{transform:translateY(0)}
+.submit-btn:hover .arrow{background:var(--ink);color:var(--yellow)}
+.submit-btn .arrow{
+  width:32px;height:32px;
+  background:var(--cream);
+  color:var(--ink);
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .3s;
+}
+.submit-btn:hover .arrow{transform:rotate(-45deg)}
+
+.form-success{
+  display:none;
+  text-align:center;
+  padding:40px 20px;
+  position:relative;
+  z-index:1;
+}
+.form-success.show{display:block}
+.form-success .check{
+  width:60px;height:60px;
+  border-radius:50%;
+  background:var(--yellow);
+  margin:0 auto 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--ink);
+}
+.form-success h3{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-.02em;
+  margin-bottom:8px;
+}
+.form-success p{
+  font-size:14px;
+  color:var(--gray);
+  line-height:1.6;
+  max-width:340px;
+  margin:0 auto;
+}
+
+/* ============ FAQ ============ */
+.faq-section{
+  background:var(--cream-2);
+  padding:100px 0 120px;
+  border-top:1px solid var(--border);
+}
+.faq-header{
+  text-align:center;
+  margin-bottom:48px;
+}
+.faq-header h2{margin-bottom:16px}
+.faq-header p{
+  font-size:16px;
+  color:var(--gray);
+  max-width:520px;
+  margin:0 auto;
+  line-height:1.6;
+}
+.faq-list{
+  max-width:780px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.faq-item{
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  transition:all .3s;
+}
+.faq-item:hover{border-color:var(--border-dark)}
+.faq-item.open{
+  border-color:var(--ink);
+  box-shadow:0 18px 40px -22px rgba(10,10,10,.14);
+}
+.faq-q{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:22px 26px;
+  text-align:left;
+  font-size:15.5px;
+  font-weight:600;
+  color:var(--ink);
+  letter-spacing:-.015em;
+}
+.faq-toggle{
+  width:30px;height:30px;
+  border-radius:50%;
+  background:var(--cream-2);
+  color:var(--ink);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:all .3s;
+}
+.faq-item.open .faq-toggle{
+  background:var(--ink);
+  color:var(--cream);
+  transform:rotate(45deg);
+}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s cubic-bezier(.2,1,.2,1);
+}
+.faq-a-inner{
+  padding:0 26px 24px;
+  font-size:14.5px;
+  color:var(--ink-soft);
+  line-height:1.65;
+}
+.faq-item.open .faq-a{max-height:300px}
+
+/* ============ FOOTER ============ */
+footer{background:var(--cream);color:var(--ink);padding:56px 0 28px;position:relative;overflow:hidden}
+footer::before{content:'HORIZON*';position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);font-size:clamp(120px,24vw,380px);font-weight:900;letter-spacing:-.05em;color:var(--cream-2);z-index:0;white-space:nowrap;line-height:.8;pointer-events:none}
+.footer-bottom{position:relative;z-index:2;padding-top:24px;display:flex;justify-content:space-between;font-size:12px;color:var(--gray);align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom a{color:inherit;opacity:.65;text-decoration:underline;text-underline-offset:3px;transition:opacity .2s, color .2s}
+.footer-bottom a:hover{opacity:1;color:var(--ink)}
+.footer-bottom .status{display:flex;align-items:center;gap:8px}
+.footer-bottom .status::before{content:'';width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.2);animation:pulse 2s infinite}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,1,.2,1), transform .8s cubic-bezier(.2,1,.2,1)}
+.reveal.show{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.08s}
+.reveal-delay-2{transition-delay:.16s}
+.reveal-delay-3{transition-delay:.24s}
+
+/* Responsive */
+@media (max-width:1000px){
+  .split-grid{grid-template-columns:1fr;gap:36px}
+  nav ul{display:none}
+}
+@media (max-width:600px){
+  .form-wrap{padding:28px 22px 24px}
+  .field-row{grid-template-columns:1fr}
+  .contact-hero{padding-top:140px}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav class="top">
+  <a href="index.html" class="logo">
+    <img src="logo horizon.png" alt="Horizon Visual Agency" style="height:28px;width:auto;border-radius:6px;">
+    Horizon Visual Agency
+  </a>
+  <ul>
+    <li><a href="index.html#problem">Pourquoi</a></li>
+    <li><a href="index.html#guarantee">Garanties</a></li>
+    <li><a href="index.html#method">Méthode</a></li>
+    <li><a href="index.html#projects">Études de cas</a></li>
+  </ul>
+  <a href="#form" class="nav-cta">
+    <span>Aller au formulaire</span>
+    <span class="nav-arrow">
+      <svg width="10" height="10" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </a>
+</nav>
+
+<header class="contact-hero">
+  <div class="container">
+    <span class="badge reveal">Disponible · <span id="dyn-quarter-hero">Q2 2026</span></span>
+    <h1 class="reveal reveal-delay-1">
+      <span class="break">Définissons votre</span>
+      <span class="break">nouvelle <span class="hl-blue">trajectoire.</span></span>
+    </h1>
+    <p class="lede reveal reveal-delay-2">Un diagnostic stratégique de 30 minutes pour identifier vos leviers de conversion et valider l'opportunité d'une collaboration. Sans engagement, sans script commercial.</p>
+  </div>
+</header>
+
+<section class="contact-split">
+  <div class="container">
+    <div class="split-grid">
+
+      <!-- LEFT — channels + availability -->
+      <div>
+        <div class="reveal">
+          <div class="channels-title">Canaux directs</div>
+          <div class="channels">
+
+            <a href="mailto:contact@horizon-visual-agency.com" class="channel-card email">
+              <div class="ch-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 7l9 6 9-6"/></svg>
+              </div>
+              <div class="ch-body">
+                <div class="ch-label">Email · Réponse sous 24 h</div>
+                <div class="ch-value">contact@horizon-visual-agency.com</div>
+              </div>
+              <div class="ch-arrow">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </a>
+
+            <a href="https://wa.me/33658596713" class="channel-card whatsapp" target="_blank" rel="noopener">
+              <div class="ch-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .2.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4 0-.1-.3-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.7.5 3.3 1.3 4.7L2 22l5.5-1.4c1.4.7 2.9 1.1 4.5 1.1 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+              </div>
+              <div class="ch-body">
+                <div class="ch-label">WhatsApp · Échange immédiat</div>
+                <div class="ch-value">+Cliquez sur ce bouton</div>
+              </div>
+              <div class="ch-arrow">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </a>
+
+            <a href="https://calendly.com/horizon-visual-agency/30min" class="channel-card calendly" target="_blank" rel="noopener">
+              <div class="ch-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div class="ch-body">
+                <div class="ch-label">Calendly · Diagnostic 30 min</div>
+                <div class="ch-value">Choisir un créneau libre</div>
+              </div>
+              <div class="ch-arrow">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="availability reveal reveal-delay-2">
+          <div class="av-head">Capacité actuelle</div>
+          <div class="av-text"><strong>2 projets disponibles</strong><br>pour un démarrage en <span id="dyn-quarter-av">Q2 2026</span>.</div>
+          <div class="av-sub">Nous limitons volontairement notre charge pour garantir un pilotage premium sur chaque mission.</div>
+        </div>
+      </div>
+
+      <!-- RIGHT — form -->
+      <div class="form-wrap reveal reveal-delay-1" id="form">
+        <div class="form-head">Brief stratégique</div>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Nom complet<span class="req">*</span></label>
+              <input type="text" id="name" name="name" placeholder="Marie Dupont" required>
+            </div>
+            <div class="field">
+              <label for="company">Entreprise</label>
+              <input type="text" id="company" name="company" placeholder="Acme Studio">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email<span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="vous@entreprise.com" required>
+            </div>
+            <div class="field">
+              <label for="phone">Téléphone</label>
+              <input type="tel" id="phone" name="phone" placeholder="+33 6 00 00 00 00">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Type de projet<span class="req">*</span></label>
+            <div class="chip-group" id="typeChips">
+              <button type="button" class="chip" data-value="Site vitrine premium">Site vitrine premium</button>
+              <button type="button" class="chip" data-value="Landing de conversion">Landing de conversion</button>
+              <button type="button" class="chip" data-value="Refonte stratégique">Refonte stratégique</button>
+              <button type="button" class="chip" data-value="Plateforme sur mesure">Plateforme sur mesure</button>
+              <button type="button" class="chip" data-value="Autre">Autre</button>
+            </div>
+            <input type="hidden" id="projectType" name="projectType">
+          </div>
+
+          <div class="field">
+            <label for="budget">Budget envisagé</label>
+            <select id="budget" name="budget">
+              <option value="">— Sélectionner une fourchette —</option>
+              <option value="< 5 k€">Moins de 5 000 €</option>
+              <option value="5–10 k€">5 000 € — 10 000 €</option>
+              <option value="10–20 k€">10 000 € — 20 000 €</option>
+              <option value="20–50 k€">20 000 € — 50 000 €</option>
+              <option value="> 50 k€">Plus de 50 000 €</option>
+              <option value="À définir">À définir ensemble</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Votre projet en quelques mots<span class="req">*</span></label>
+            <textarea id="message" name="message" placeholder="Contexte, objectifs, contraintes, deadline idéale… plus c'est précis, plus notre première réponse sera utile." required></textarea>
+          </div>
+
+          <label class="consent">
+            <input type="checkbox" id="consent" required>
+            <span>J'accepte que mes données soient utilisées pour traiter cette demande, conformément à la <a href="confidentialite.html">politique de confidentialité</a>.</span>
+          </label>
+
+          <button type="submit" class="submit-btn">
+            <span>Envoyer la demande</span>
+            <span class="arrow">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <div class="check">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg>
+          </div>
+          <h3>Message en route.</h3>
+          <p>Votre client mail s'est ouvert avec votre brief pré-rempli. Réponse personnelle sous 24 h ouvrées.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <div class="faq-header reveal">
+      <span class="badge">Questions fréquentes</span>
+      <h2>Avant de nous <span class="hl-blue">écrire.</span></h2>
+      <p>Les réponses aux questions qui reviennent le plus souvent. Si la vôtre n'est pas listée, le formulaire est juste au-dessus.</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          <span>Quel est le délai moyen de livraison&nbsp;?</span>
+          <span class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M3 7h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">14 jours ouvrés pour un site vitrine premium standard, à compter de la réception de l'acompte et des contenus. Pour les plateformes sur mesure, le délai est défini précisément lors du diagnostic.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          <span>Travaillez-vous à l'international&nbsp;?</span>
+          <span class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M3 7h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Oui. Nous sommes basés à Paris mais collaborons à distance avec des clients en Europe, au Maghreb et en Amérique du Nord. Tout le pilotage est asynchrone et structuré pour fonctionner sur n'importe quel fuseau horaire.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          <span>Que se passe-t-il après l'envoi du formulaire&nbsp;?</span>
+          <span class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M3 7h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Réponse personnelle sous 24 h ouvrées avec un premier retour qualifié. Si le projet est aligné, nous proposons un appel diagnostic de 30 min pour creuser. Sans engagement.</div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          <span>Proposez-vous de la maintenance après le lancement&nbsp;?</span>
+          <span class="faq-toggle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M3 7h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Oui. Trois formules d'accompagnement post-lancement existent : maintenance technique, optimisation continue de la conversion, ou retainer stratégique. Détails communiqués lors du diagnostic.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© <span id="dyn-year">2026</span> Horizon Visual Agency — <a href="mentions-legales.html">Mentions légales</a> · <a href="cgv.html">CGV</a> · <a href="confidentialite.html">Confidentialité</a> · <a href="contact.html">Contact</a></span>
+      <span class="status">Trajectoire <span id="dyn-quarter">Q2 2026</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Progress bar */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  progressBar.style.width = pct + '%';
+}, { passive: true });
+
+/* Reveal */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* Chips */
+const chipGroup = document.getElementById('typeChips');
+const projectTypeInput = document.getElementById('projectType');
+chipGroup.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  chipGroup.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  projectTypeInput.value = chip.dataset.value;
+});
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.closest('.faq-item');
+    item.classList.toggle('open');
+  });
+});
+
+/* Form — mailto handoff (no backend) */
+const form = document.getElementById('contactForm');
+const successEl = document.getElementById('formSuccess');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  const name = (data.get('name') || '').trim();
+  const company = (data.get('company') || '').trim();
+  const email = (data.get('email') || '').trim();
+  const phone = (data.get('phone') || '').trim();
+  const type = projectTypeInput.value || '—';
+  const budget = data.get('budget') || '—';
+  const message = (data.get('message') || '').trim();
+  const consent = document.getElementById('consent').checked;
+
+  if (!name || !email || !message || !consent) {
+    form.reportValidity();
+    return;
+  }
+
+  const subject = `Nouveau brief — ${name}${company ? ' · ' + company : ''}`;
+  const body =
+    `Nom : ${name}\n` +
+    `Entreprise : ${company || '—'}\n` +
+    `Email : ${email}\n` +
+    `Téléphone : ${phone || '—'}\n` +
+    `Type de projet : ${type}\n` +
+    `Budget : ${budget}\n\n` +
+    `--- Brief ---\n${message}\n`;
+
+  window.location.href = `mailto:contact@horizon-visual-agency.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  setTimeout(() => {
+    form.style.display = 'none';
+    successEl.classList.add('show');
+  }, 400);
+});
+
+/* Dynamic year + quarter */
+(function(){
+  const d = new Date();
+  const y = d.getFullYear();
+  const q = Math.floor(d.getMonth() / 3) + 1;
+  const qStr = 'Q' + q + ' ' + y;
+  ['dyn-year'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = y; });
+  ['dyn-quarter','dyn-quarter-hero','dyn-quarter-av'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = qStr; });
+})();
+</script>
+</body>
+</html>

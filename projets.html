@@ -154,7 +154,10 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:
 .d1{transition-delay:.09s}.d2{transition-delay:.18s}
 @media(max-width:960px){.fp{grid-template-columns:1fr;min-height:auto}.fp.rev{direction:ltr}.fp-visual{min-height:260px}.fp-info{padding:32px}.p-grid{grid-template-columns:1fr 1fr}nav{padding:16px 20px}.nav-txt{display:none}.container{padding:0 20px}.hero{padding:120px 0 36px}}
 @media(max-width:560px){.p-grid{grid-template-columns:1fr}}
-</style>
+/* Navbar underline hover — cohérence avec l'index */
+nav ul a{position:relative}
+nav ul a::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+nav ul a:hover::after{transform:scaleX(1);transform-origin:left}</style>
 </head>
 <body>
 <div id="progress-bar"></div>

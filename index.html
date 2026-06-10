@@ -223,7 +223,7 @@ nav ul a:hover{color:var(--blue)}
   z-index:1;                 /* passe au-dessus du quadrillage global */
   background:var(--cream);   /* fond plein : plus de quadrillage dans le hero */
   overflow:hidden;
-  padding:144px 0 96px;      /* léger biais vers le bas : bloc mieux centré optiquement */
+  padding:120px 0 100px;
 }
 .hero::before{
   content:'';
@@ -274,8 +274,8 @@ nav ul a:hover{color:var(--blue)}
   margin:24px auto 32px;
 }
 .hero-desc{
-  font-size:16px;
-  line-height:1.65;
+  font-size:15px;
+  line-height:1.6;
   color:var(--gray);
   max-width:520px;
   margin:0 auto 40px;
@@ -1886,16 +1886,9 @@ footer::before{
 }
 @media(max-width:640px){
   .container{padding:0 22px}
-  .hero{height:auto;min-height:100svh;padding:104px 0 72px}
-  /* titre dimensionné pour tenir dans la largeur : surlignage entier visible, plus de mots coupés */
-  .hero h1{font-size:clamp(27px,7.6vw,40px);line-height:1.14;letter-spacing:-.01em;margin:16px auto 22px;max-width:100%}
-  .hero-desc{font-size:15px;line-height:1.65;max-width:340px;margin-bottom:32px}
-  /* surlignage : il colle au mot, pas d'ombre « boîte », rotation douce */
-  .hero h1 .hl-yellow,
-  .hero h1 .rotator{padding:0 .12em}
-  .hero h1 .hl-yellow::before,
-  .hero h1 .rotator::before{inset:-.02em -.04em -.08em;border-radius:.1em;transform:rotate(-1.5deg)}
-  .hero h1 .rotator::before{box-shadow:none}
+  .hero{height:auto;min-height:100svh;padding:128px 0 80px}
+  .hero h1{margin:20px auto 26px;max-width:100%}
+  .hero-desc{font-size:15px;line-height:1.6;max-width:330px;margin-bottom:34px}
   .hero-actions{
     flex-direction:column;
     align-items:stretch;

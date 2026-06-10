@@ -22,6 +22,9 @@
   --border-dark:#d8d8d0;
   --blue:#3d95ff;
   --yellow:#fcf240;
+  /* Accent contextuel — identité Horizon (bleu, cohérent avec la carte de l'index) */
+  --accent:#3d95ff;
+  --accent-strong:#2878e0;
   --sans:'Inter',-apple-system,sans-serif;
 }
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
@@ -565,6 +568,43 @@ const obs = new IntersectionObserver(es => {
 document.querySelectorAll('.rev').forEach(el => obs.observe(el));
 
 document.getElementById('dyn-year').textContent = new Date().getFullYear();
+</script>
+
+<!-- POLISH JS — boutons magnétiques (porté de l'index) -->
+<script>
+(function(){
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (!fine || reduce) return;
+
+  document.querySelectorAll('.nav-cta,.yt-btn').forEach(function(btn){
+    var strength = 0.18;
+    btn.addEventListener('mousemove', function(e){
+      var r = btn.getBoundingClientRect();
+      var x = e.clientX - (r.left + r.width/2);
+      var y = e.clientY - (r.top + r.height/2);
+      btn.style.transform = 'translate('+(x*strength)+'px,'+(y*strength)+'px)';
+    });
+    btn.addEventListener('mouseleave', function(){ btn.style.transform = 'translate(0,0)'; });
+  });
+
+  var wa = document.querySelector('.wa-btn');
+  if (wa){
+    var ws = 0.2, waReset;
+    wa.addEventListener('mousemove', function(e){
+      clearTimeout(waReset);
+      var r = wa.getBoundingClientRect();
+      var x = e.clientX - (r.left + r.width/2);
+      var y = e.clientY - (r.top + r.height/2);
+      wa.style.animation = 'none';
+      wa.style.transform = 'translate('+(x*ws)+'px,'+(y*ws)+'px) scale(1.08)';
+    });
+    wa.addEventListener('mouseleave', function(){
+      wa.style.transform = 'translate(0,0) scale(1)';
+      waReset = setTimeout(function(){ wa.style.animation = ''; }, 320);
+    });
+  }
+})();
 </script>
 
 </body>

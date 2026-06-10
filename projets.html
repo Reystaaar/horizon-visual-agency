@@ -266,6 +266,23 @@ document.querySelectorAll('.f-btn').forEach(btn=>{
   });
 });
 document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* POLISH JS — boutons magnétiques (porté de l'index) */
+(function(){
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (!fine || reduce) return;
+  document.querySelectorAll('.nav-cta,.cta-dk,.fp-link').forEach(function(btn){
+    var strength = 0.18;
+    btn.addEventListener('mousemove', function(e){
+      var r = btn.getBoundingClientRect();
+      var x = e.clientX - (r.left + r.width/2);
+      var y = e.clientY - (r.top + r.height/2);
+      btn.style.transform = 'translate('+(x*strength)+'px,'+(y*strength)+'px)';
+    });
+    btn.addEventListener('mouseleave', function(){ btn.style.transform = 'translate(0,0)'; });
+  });
+})();
 </script>
 </body>
 </html>

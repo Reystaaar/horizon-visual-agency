@@ -22,6 +22,9 @@
   --border-dark:#d8d8d0;
   --blue:#3d95ff;
   --yellow:#fcf240;
+  /* Accent contextuel — identité Podblend (cuivre/ambre, cohérent avec la carte de l'index) */
+  --accent:#c37832;
+  --accent-strong:#dc8c3c;
   --sans:'Inter',-apple-system,sans-serif;
 }
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
@@ -36,12 +39,12 @@ body{
   font-feature-settings:"ss01","cv11";
 }
 a{color:inherit;text-decoration:none}
-::selection{background:var(--blue);color:#fff}
+::selection{background:var(--accent);color:#fff}
 
 /* PROGRESS BAR */
 #progress-bar{
   position:fixed;top:0;left:0;height:2px;
-  background:linear-gradient(90deg,var(--blue),var(--yellow));
+  background:linear-gradient(90deg,var(--accent),var(--yellow));
   z-index:10000;width:0%;pointer-events:none;
 }
 
@@ -81,7 +84,7 @@ nav .logo-mark::after{
 }
 nav ul{display:flex;list-style:none;gap:22px;font-size:13px;font-weight:500;color:var(--ink-soft)}
 nav ul a{transition:color .2s}
-nav ul a:hover{color:var(--blue)}
+nav ul a:hover{color:var(--accent)}
 .nav-cta{
   padding:8px 8px 8px 16px;
   background:var(--cream);color:var(--ink);
@@ -141,8 +144,8 @@ nav ul a:hover{color:var(--blue)}
 /* Effet au survol pour un rendu plus dynamique */
 .gallery-item:hover {
   transform: translateY(-6px);
-  box-shadow: 0 15px 30px rgba(10, 10, 10, 0.08);
-  border-color: var(--blue);
+  box-shadow: 0 15px 30px rgba(195, 120, 50, 0.18);
+  border-color: var(--accent-strong);
   z-index: 2;
 }
 .gallery-item img {
@@ -288,7 +291,7 @@ nav ul a:hover{color:var(--blue)}
   left:0;top:11px;
   width:8px;height:8px;
   border-radius:50%;
-  background:var(--blue);
+  background:var(--accent);
 }
 .recette-list li strong{
   color:var(--ink);
@@ -353,7 +356,7 @@ nav ul a:hover{color:var(--blue)}
   position:relative;
   overflow:hidden;
   background-image:
-    radial-gradient(ellipse at 30% 30%, rgba(61,149,255,.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 30%, rgba(195,120,50,.35) 0%, transparent 50%),
     radial-gradient(ellipse at 70% 70%, rgba(252,242,64,.2) 0%, transparent 50%);
   display:flex;
   flex-direction:column;
@@ -367,7 +370,7 @@ nav ul a:hover{color:var(--blue)}
   margin-bottom:6px;
 }
 .ytm-screen .small-title .b{
-  background:var(--blue);padding:0 4px;border-radius:3px;
+  background:var(--accent);padding:0 4px;border-radius:3px;
 }
 .ytm-screen .small-sub{
   font-size:8px;
@@ -397,7 +400,7 @@ nav ul a:hover{color:var(--blue)}
 .yt-btn-primary{
   background:var(--ink);color:var(--cream);
 }
-.yt-btn-primary:hover{background:var(--blue);transform:translateY(-2px)}
+.yt-btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
 .yt-btn-ghost{
   background:transparent;
   border:1px solid var(--border-dark);
@@ -652,9 +655,9 @@ nav ul a:hover::after{transform:scaleX(1);transform-origin:left}</style>
       <p class="case-tagline rev d2">Redonner au talent sa vraie place.</p>
 
       <div class="case-tags rev d2">
-        <span class="case-tag">Design Premium</span>
-        <span class="case-tag">Stratégie de Marque</span>
-        <span class="case-tag">Landing Page</span>
+        <span class="case-tag">Refonte Premium</span>
+        <span class="case-tag">Autorité Visuelle</span>
+        <span class="case-tag">Landing Conversion</span>
       </div>
 
       <div class="sector-line rev d3">
@@ -683,10 +686,6 @@ nav ul a:hover::after{transform:scaleX(1);transform-origin:left}</style>
           <li><strong>Focus conversion :</strong> chaque élément donne envie de prendre contact.</li>
           <li><strong>Mobile First :</strong> une fluidité parfaite, peu importe l'écran.</li>
         </ul>
-      </div>
-
-      <div class="punchline rev d4">
-        Quand l'image impose le respect, le prix ne devient plus qu'un détail.
       </div>
     </div>
 
@@ -776,6 +775,43 @@ const obs = new IntersectionObserver(es => {
 document.querySelectorAll('.rev').forEach(el => obs.observe(el));
 
 document.getElementById('dyn-year').textContent = new Date().getFullYear();
+</script>
+
+<!-- POLISH JS — boutons magnétiques (porté de l'index) -->
+<script>
+(function(){
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if (!fine || reduce) return;
+
+  document.querySelectorAll('.nav-cta,.yt-btn').forEach(function(btn){
+    var strength = 0.18;
+    btn.addEventListener('mousemove', function(e){
+      var r = btn.getBoundingClientRect();
+      var x = e.clientX - (r.left + r.width/2);
+      var y = e.clientY - (r.top + r.height/2);
+      btn.style.transform = 'translate('+(x*strength)+'px,'+(y*strength)+'px)';
+    });
+    btn.addEventListener('mouseleave', function(){ btn.style.transform = 'translate(0,0)'; });
+  });
+
+  var wa = document.querySelector('.wa-btn');
+  if (wa){
+    var ws = 0.2, waReset;
+    wa.addEventListener('mousemove', function(e){
+      clearTimeout(waReset);
+      var r = wa.getBoundingClientRect();
+      var x = e.clientX - (r.left + r.width/2);
+      var y = e.clientY - (r.top + r.height/2);
+      wa.style.animation = 'none';
+      wa.style.transform = 'translate('+(x*ws)+'px,'+(y*ws)+'px) scale(1.08)';
+    });
+    wa.addEventListener('mouseleave', function(){
+      wa.style.transform = 'translate(0,0) scale(1)';
+      waReset = setTimeout(function(){ wa.style.animation = ''; }, 320);
+    });
+  }
+})();
 </script>
 
 </body>
